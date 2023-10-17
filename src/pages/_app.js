@@ -1,14 +1,25 @@
+import { ApolloProvider } from '@apollo/client';
+
 import Layout from '@/components/layout';
-import GraphQLProvider from '@/providers/GraphQLProvider';
+import useRealmAnonAuth from '@/hooks/useRealmAnonAuth';
+import createApolloClient from '@/lib/graphql/createApolloClient';
 
 import '@/styles/globals.css';
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
+    // Fetch anon user access token
+    const accessToken = useRealmAnonAuth();
+
+    // Create new Apollo Client (client-side)
+    const client = createApolloClient(accessToken);
+
     return (
-        <GraphQLProvider>
+        <ApolloProvider client={client}>
             <Layout>
                 <Component {...pageProps} />
             </Layout>
-        </GraphQLProvider>
+        </ApolloProvider>
     );
 }
+
+export default App;
