@@ -1,3 +1,8 @@
+/**
+ * 2023-10-30: This hook is no longer used but kept here as a
+ * reference just in case for the time being.
+ */
+
 import { useState, useEffect } from 'react';
 import * as Realm from 'realm-web';
 import { setCookie } from 'nookies';
